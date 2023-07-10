@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.myapppruebafinal.Adaptadores.AdaptadorRevista;
 import com.example.myapppruebafinal.Modelos.Revista;
 import com.example.myapppruebafinal.WebServer.WebService;
@@ -29,10 +32,9 @@ public class MainActivity extends AppCompatActivity implements com.example.myapp
         ListOpc=findViewById(R.id.LstListaRevista);
         View header = getLayoutInflater().inflate(R.layout.lyitemheader, null);
         ListOpc.addHeaderView(header);
-        String url="https://revistas.uteq.edu.ec/ws/journals.php";
 
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws = new WebService("https://revistas.uteq.edu.ec/ws/journals.php",
+        WebService ws = new WebService("https://fakestoreapi.com/products",
                 datos, MainActivity.this, MainActivity.this);
         ws.execute("GET");
         //ListOpc.setOnItemClickListener(this);
@@ -54,27 +56,14 @@ public class MainActivity extends AppCompatActivity implements com.example.myapp
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 1:
-                abrirLibros(3);
-                break;
-            case 2:
-                abrirLibros(2);
-                break;
-            case 3:
-                abrirLibros(1);
-                break;
-            default:
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
+        Revista revistaSeleccionada = (Revista) parent.getItemAtPosition(position);
 
-    private void abrirLibros(int id) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("ID", id);
         Intent intent = new Intent(MainActivity.this, MainActivityEdicion.class);
-        intent.putExtras(bundle);
+        intent.putExtra("categoria", revistaSeleccionada.getCategoria());
+        intent.putExtra("titulo", revistaSeleccionada.getTitulo());
+        intent.putExtra("precio", revistaSeleccionada.getPrecio());
+        intent.putExtra("imagenUrl", revistaSeleccionada.getPortada());
         startActivity(intent);
+
     }
 }

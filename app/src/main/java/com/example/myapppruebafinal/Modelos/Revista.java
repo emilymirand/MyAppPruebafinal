@@ -9,11 +9,17 @@ import java.util.ArrayList;
 public class Revista {
     private String Id;
     private String Portada;
-    private String Nombre;
+    private String Titulo;
+    private String Categoria;
+    private String  Precio;
+    private String Descripcion;
+
     public  Revista(JSONObject jsonDato) throws JSONException {
-        Id=jsonDato.getString("journal_id");
-        Portada=jsonDato.getString("portada");
-        Nombre=jsonDato.getString("name");
+        Categoria=jsonDato.getString("category");
+        Titulo=jsonDato.getString("title");
+        Precio=jsonDato.getString("price");
+        Descripcion=jsonDato.getString("description");
+        Portada=jsonDato.getString("image");
 
     }
     public static ArrayList<Revista> JsonObjectsBuild(JSONArray datos) throws JSONException {
@@ -40,11 +46,35 @@ public class Revista {
         Portada = portada;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getTitulo() {
+        return Titulo;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setTitulo(String titulo) {
+        Titulo = titulo;
+    }
+
+    public String getCategoria() {
+        return Categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        Categoria = categoria;
+    }
+
+    public String getPrecio() {
+        return Precio;
+    }
+
+    public void setPrecio(String precio) {
+        Precio = precio;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
     }
 }

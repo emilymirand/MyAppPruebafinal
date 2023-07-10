@@ -21,8 +21,11 @@ public class AdaptadorRevista extends ArrayAdapter<Revista> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View item = inflater.inflate(R.layout.lyitemrevista, null);
-        TextView lblNombre = (TextView)item.findViewById(R.id.lblTitulo);lblNombre.setText(getItem(position).getNombre());
-        ImageView imageView = (ImageView)item.findViewById(R.id.ImaPortada);
+        TextView lblcategoria = (TextView)item.findViewById(R.id.categoria1);lblcategoria.setText(getItem(position).getCategoria());
+        TextView lblTitulo = (TextView)item.findViewById(R.id.titulo);lblTitulo.setText(getItem(position).getTitulo());
+        TextView lblPrecio = (TextView)item.findViewById(R.id.precio1);lblPrecio.setText(getItem(position).getPrecio());
+        TextView lblDescripcion = (TextView)item.findViewById(R.id.descripcion);lblDescripcion.setText(getItem(position).getTitulo());
+        ImageView imageView = (ImageView)item.findViewById(R.id.portada);
         Glide.with(this.getContext())
                 .load(getItem(position).getPortada())
                 .into(imageView);
